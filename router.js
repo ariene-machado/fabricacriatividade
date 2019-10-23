@@ -5,7 +5,7 @@ var router = express.Router();
 
 //Home page route
 router.get('/user', function(req, res) {
-    res.send('Home page user Ariene hi5!!!');
+    res.send('Home page user Ariene hi50000 wow!!!');
 });
 
 //Login page route
