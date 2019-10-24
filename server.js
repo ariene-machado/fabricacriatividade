@@ -3,6 +3,11 @@ var app = express();
 var router_user = require('./router.js');
 var PORT = process.env.PORT || 8080;
 var cors = require('cors')
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 app.use(cors())
 

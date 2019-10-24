@@ -11,10 +11,14 @@ var Cliente = require('./model/Cliente');
 //Creating client
 router.post("/login", function(req, res) {
 
+	console.log(req.body);
+
+	  console.log("add: " + JSON.stringify(req.body));
+
         Cliente.create({
             nome: req.body.nome,
             email: req.body.email,
-            whatsApp: req.body.Whatsapp
+            whatsApp: req.body.whatsApp
         }, function(err) {
             if (err) {
                 console.log(err);
@@ -23,6 +27,8 @@ router.post("/login", function(req, res) {
             }
         });
     });
+
+
 
 //Home page route
 router.get('/user', function(req, res) {
