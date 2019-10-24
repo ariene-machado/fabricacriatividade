@@ -25,7 +25,9 @@ var mongoose = require('mongoose');
 
 //mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/ClientDb');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://userAdmin:aladim2019@ds311128.mlab.com:11128/heroku_6z9s0v4r');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://admdb:aladim2019@ds339458.mlab.com:39458/heroku_dhdmg4z4');
+
+//mongodb://admdb:aladim2019@ds339458.mlab.com:39458/heroku_dhdmg4z4
 
 //Get the default connection
 var db = mongoose.connection;
