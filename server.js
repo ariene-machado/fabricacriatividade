@@ -16,12 +16,11 @@ app.use(cors())
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/ClientDb';
+//var mongoDB = 'mongodb://127.0.0.1/ClientDb';
 
 //mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/ClientDb');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://webAdmin:Aladim2019@ds311128.mlab.com:11128/heroku_6z9s0v4r');
-
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://userAdmin:aladim2019@ds311128.mlab.com:11128/heroku_6z9s0v4r');
 
 //Get the default connection
 var db = mongoose.connection;
