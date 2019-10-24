@@ -1,7 +1,28 @@
 // page route module
 
+
 var express = require('express');
+var app = express();
 var router = express.Router();
+
+var Cliente = require('./model/Cliente');
+
+
+//Creating client
+router.post("/login", function(req, res) {
+       
+        Cliente.create({
+            nome: req.body.nome,
+            email: req.body.email,
+            whatsApp: req.body.Whatsapp
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Saved User");
+            }
+        });
+    });
 
 //Home page route
 router.get('/user', function(req, res) {
@@ -9,9 +30,9 @@ router.get('/user', function(req, res) {
 });
 
 //Login page route
-router.get('/login', function(req, res) {
-    res.send('Page login');
-});
+//router.get('/login', function(req, res) {
+  //  res.send('Page login');
+//});
 
 //Problema page route
 router.get('/problema', function(req, res) {
@@ -42,6 +63,5 @@ router.get('/view-ideias', function(req, res) {
 router.get('/criar-livro', function(req, res) {
     res.send('Page view criar livro');
 });
-
 
 module.exports = router;
