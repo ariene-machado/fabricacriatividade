@@ -4,12 +4,17 @@ var router_user = require('./router.js');
 var PORT = process.env.PORT || 8080;
 var cors = require('cors')
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv')
+
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.use(cors())
+
+require('dotenv').config();
 
 
 //Import the mongoose module
