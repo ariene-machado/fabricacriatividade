@@ -10,7 +10,7 @@ var Cliente = require('./model/Cliente');
 
 //Creating client
 router.post("/login", function(req, res) {
-       
+
         Cliente.create({
             nome: req.body.nome,
             email: req.body.email,

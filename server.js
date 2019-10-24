@@ -2,6 +2,9 @@ var express = require('express');
 var app = express();
 var router_user = require('./router.js');
 var PORT = process.env.PORT || 8080;
+var cors = require('cors')
+
+app.use(cors())
 
 
 //Import the mongoose module
@@ -10,7 +13,9 @@ var mongoose = require('mongoose');
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/ClientDb';
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb:webAdmin:Aladim2019@ds311128.mlab.com:11128/heroku_6z9s0v4r');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/ClientDb');
+
+
 
 
 //Get the default connection
