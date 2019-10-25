@@ -28,7 +28,7 @@ router.post("/login", function(req, res) {
 
 //Home page route
 router.get('/user', function(req, res) {
-    res.send('Home page user Ariene hi50000 wow!!!');
+    res.send('Home page user Ariene app fabrica!!!');
 });
 
 //Login page route
