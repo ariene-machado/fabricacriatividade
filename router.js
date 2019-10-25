@@ -19,7 +19,11 @@ router.post("/login", function(req, res) {
             if (err) {
                 console.log(err);
             } else {
-                res.send("Saved User");
+
+            	res.setHeader("Location", "http://arienemachado.com/testApp/problema.html");
+
+                //res.send("Saved User");
+
             }
         });
     });
