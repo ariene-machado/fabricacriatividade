@@ -12,9 +12,9 @@ var cliente = require('./model/Cliente');
 router.post("/login", function(req, res) {
 
         cliente.create({
-            nome: 'req.body.nome',
-            email: 'req.body.email',
-            whatsApp: 'req.body.whatsApp'
+            nome: req.body.nome,
+            email: req.body.email,
+            whatsApp: req.body.whatsApp
         }, function(err) {
             if (err) {
                 console.log(err);
