@@ -20,7 +20,10 @@ router.post("/login", function(req, res) {
                 console.log(err);
             } else {
 
+            	 res.statusCode = 302;
             	res.setHeader("Location", "http://arienemachado.com/testApp/problema.html");
+                   res.end();
+
 
                 //res.send("Saved User");
 
