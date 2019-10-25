@@ -21,13 +21,12 @@ require('dotenv').config();
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-//var mongoDB = 'mongodb://127.0.0.1/ClientDb';
-
-//mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/ClientDb');
+var mongoDB = 'mongodb://127.0.0.1/ClientDb';
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://admdb:aladim2019@ds339458.mlab.com:39458/heroku_dhdmg4z4');
 
-//mongodb://admdb:aladim2019@ds339458.mlab.com:39458/heroku_dhdmg4z4
+//mongoose.connect(process.env.MONGODB_URI || mongoDB); //se o banco or local funciona
+
 
 //Get the default connection
 var db = mongoose.connection;
