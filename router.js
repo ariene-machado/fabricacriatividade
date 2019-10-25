@@ -5,13 +5,13 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-var Cliente = require('./model/Cliente');
+var cliente = require('./model/cliente');
 
 
 //Creating client
 router.post("/login", function(req, res) {
 
-        Cliente.create({
+        cliente.create({
             nome: req.body.nome,
             email: req.body.email,
             whatsApp: req.body.whatsApp
