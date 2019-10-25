@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-var cliente = require('./model/cliente');
+var cliente = require('./model/Cliente');
 
 
 //Creating client
