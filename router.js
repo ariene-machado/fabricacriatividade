@@ -57,6 +57,32 @@ router.post("/problema", function(req, res) {
     });
 
 
+//Creating problema
+router.post("/solucao", function(req, res) {
+
+        Problema.create({
+            ideia1: req.body.ideia1,
+            ideia2: req.body.ideia2,
+            ideia3: req.body.ideia3,
+            ideiaForaCaixa: req.body.ideiaForaCaixa,
+            clienteId: req.body.idCliente
+
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+            	 res.statusCode = 302;
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
+                  res.end();
+                  console.log('saved prototipacao');
+            }
+        });
+    });
+
+
+
+
 
 //Home page route
 router.get('/user', function(req, res) {
