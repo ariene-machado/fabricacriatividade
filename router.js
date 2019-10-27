@@ -5,7 +5,7 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-var cliente = require('./model/Cliente');
+var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
 
@@ -13,7 +13,7 @@ var Solucao = require('./model/Solucao');
 //Creating client
 router.post("/login", function(req, res) {
 
-        cliente.create({
+        Cliente.create({
         	
             nome: req.body.nome,
             email: req.body.email,
