@@ -23,12 +23,7 @@ require('dotenv').config();
 //Import the mongoose module
 var mongoose = require('mongoose');
 
-const storage = require('multer-gridfs-storage')({
-   url: 'mongodb://admdb:aladim2019@ds339458.mlab.com:39458/heroku_dhdmg4z4'
-});
 
-
-const upload = multer({ storage: storage });
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/ClientDb';
