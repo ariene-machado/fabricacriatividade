@@ -13,6 +13,13 @@ var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
 var Photo = require('./model/Photo');
 
+app.use(multer({ dest: ‘./uploads/’,
+ rename: function (fieldname, filename) {
+   return filename;
+ },
+}));
+
+
 
 //Creating client
 router.post("/login", function(req, res) {
