@@ -7,6 +7,8 @@ var router = express.Router();
 
 var cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
+var Solucao = require('./model/Solucao');
+
 
 //Creating client
 router.post("/login", function(req, res) {
@@ -60,7 +62,7 @@ router.post("/problema", function(req, res) {
 //Creating problema
 router.post("/solucao", function(req, res) {
 
-        Problema.create({
+        Solucao.create({
             ideia1: req.body.ideia1,
             ideia2: req.body.ideia2,
             ideia3: req.body.ideia3,
