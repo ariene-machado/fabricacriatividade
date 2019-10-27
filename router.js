@@ -24,7 +24,7 @@ router.post("/login", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "https://app-criatividade.herokuapp.com/problema");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/problema.html");
                   res.end();
                   console.log('saved login');
             }
@@ -49,7 +49,7 @@ router.post("/problema", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "https://app-criatividade.herokuapp.com/ideacao");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/solucao.html");
                   res.end();
                   console.log('saved problema');
             }
