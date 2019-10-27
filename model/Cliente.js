@@ -5,7 +5,9 @@ var Schema = mongoose.Schema;
 var cliente = new Schema({
     nome: String,
     email: String,
-    whatsApp: String
+    whatsApp: String,
+    clienteId: String
+
 });
 
 module.exports = mongoose.model('cliente', cliente);

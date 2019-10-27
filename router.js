@@ -6,27 +6,52 @@ var app = express();
 var router = express.Router();
 
 var cliente = require('./model/Cliente');
-
+var Problema = require('./model/Problema');
 
 //Creating client
 router.post("/login", function(req, res) {
 
         cliente.create({
+        	
             nome: req.body.nome,
             email: req.body.email,
-            whatsApp: req.body.whatsApp
+            whatsApp: req.body.whatsApp,
+            clienteId: req.body.idCliente
+
         }, function(err) {
             if (err) {
                 console.log(err);
             } else {
 
             	 res.statusCode = 302;
-            	res.setHeader("Location", "http://arienemachado.com/testApp/problema.html");
-                   res.end();
+            	  res.setHeader("Location", "https://app-criatividade.herokuapp.com/problema");
+                  res.end();
+                  console.log('saved login');
+            }
+        });
+    });
 
 
-                //res.send("Saved User");
+//Creating problema
+router.post("/problema", function(req, res) {
 
+        Problema.create({
+            problema1: req.body.problema1,
+            porque1: req.body.porque1,
+            porque2: req.body.porque2,
+            porque3: req.body.porque3,
+            problemaRaiz: req.body.problemaRaiz,
+            clienteId: req.body.idCliente
+
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+            	 res.statusCode = 302;
+            	  res.setHeader("Location", "https://app-criatividade.herokuapp.com/ideacao");
+                  res.end();
+                  console.log('saved problema');
             }
         });
     });
@@ -44,9 +69,9 @@ router.get('/user', function(req, res) {
 //});
 
 //Problema page route
-router.get('/problema', function(req, res) {
-    res.send('Page problema');
-});
+//router.get('/problema', function(req, res) {
+ //   res.send('Page problema');
+//});
 
 //Ideacao page route
 router.get('/ideacao', function(req, res) {
