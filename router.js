@@ -5,6 +5,9 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
+var multer  = require('multer')
+var upload = multer({ dest: 'uploads/' })
+
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
@@ -83,6 +86,28 @@ router.post("/solucao", function(req, res) {
     });
 
 
+
+//Upload photo
+
+app.post('/uploadphoto', upload.single('picture'), (req, res) => {
+    var img = fs.readFileSync(req.file.path);
+ var encode_image = img.toString('base64');
+ // Define a JSONobject for the image attributes for saving to database
+  
+ var finalImg = {
+      contentType: req.file.mimetype,
+      image:  new Buffer(encode_image, 'base64')
+   };
+db.collection('imgs').insertOne(finalImg, (err, result) => {
+    console.log(result)
+ 
+    if (err) return console.log(err)
+ 
+    console.log('saved image to database')
+    res.redirect('/')
+  
+  })
+})
 
 
 
