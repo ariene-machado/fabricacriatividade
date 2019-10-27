@@ -11,6 +11,7 @@ var upload = multer({ dest: 'uploads/' })
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
+var Photo = require('./model/Photo');
 
 
 //Creating client
@@ -89,26 +90,24 @@ router.post("/solucao", function(req, res) {
 
 //Upload photo
 
-router.post('/uploadphoto', upload.single('picture'), (req, res) => {
-    var img = fs.readFileSync(req.file.path);
- var encode_image = img.toString('base64');
- // Define a JSONobject for the image attributes for saving to database
-  
- var finalImg = {
-      contentType: req.file.mimetype,
-      image:  new Buffer(encode_image, 'base64')
-   };
-db.Solucao.insertOne(finalImg, (err, result) => {
-    console.log(result)
- 
-    if (err) return console.log(err)
- 
-    console.log('saved to database')
-    res.redirect('/')
-  
-     
-  })
-})
+app.post(‘/upload/photo’,function(req,res){
+
+Photo.create({
+            img: fs.readFileSync(req.files.userPhoto.path),
+            img.contentType : ‘image/png’
+           
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+            	 res.statusCode = 302;
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/index.html");
+                  res.end();
+                  console.log('saved prototipacao');
+            }
+        });
+    });
 
 
 

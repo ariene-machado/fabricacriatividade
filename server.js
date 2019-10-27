@@ -14,6 +14,12 @@ var grid = require("gridfs-stream");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(multer({ dest: ‘./uploads/’,
+ rename: function (fieldname, filename) {
+   return filename;
+ },
+}));
+
 
 app.use(cors())
 
@@ -38,18 +44,6 @@ var db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// SET STORAGE
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now())
-  }
-})
- 
-var upload = multer({ storage: storage })
 
 
 app.use('/', router_user);

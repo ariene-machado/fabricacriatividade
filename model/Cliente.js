@@ -7,7 +7,6 @@ var ClienteSchema = new Schema({
     email: String,
     whatsApp: String,
     clienteId: String
-
 });
 
 module.exports = mongoose.model('Cliente', ClienteSchema);
