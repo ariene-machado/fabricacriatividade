@@ -98,7 +98,7 @@ router.post('/uploadphoto', upload.single('picture'), (req, res) => {
       contentType: req.file.mimetype,
       image:  new Buffer(encode_image, 'base64')
    };
-db.collection('quotes').insertOne(finalImg, (err, result) => {
+Solucao.insertOne(finalImg, (err, result) => {
     console.log(result)
  
     if (err) return console.log(err)
