@@ -89,7 +89,7 @@ router.post("/solucao", function(req, res) {
 
 //Upload photo
 
-app.post('/uploadphoto', upload.single('picture'), (req, res) => {
+router.post('/uploadphoto', upload.single('picture'), (req, res) => {
     var img = fs.readFileSync(req.file.path);
  var encode_image = img.toString('base64');
  // Define a JSONobject for the image attributes for saving to database
@@ -105,7 +105,7 @@ db.collection('quotes').insertOne(finalImg, (err, result) => {
  
     console.log('saved to database')
     res.redirect('/')
-   
+  
      
   })
 })
