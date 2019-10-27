@@ -13,11 +13,8 @@ var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
 var Photo = require('./model/Photo');
 
-app.use(multer({ dest: ‘./uploads/’,
- rename: function (fieldname, filename) {
-   return filename;
- },
-}));
+var upload = multer({ dest: 'uploads/' })
+
 
 
 
@@ -96,10 +93,10 @@ router.post("/solucao", function(req, res) {
 
 
 //Upload photo
-
-app.post(‘/upload/photo’,function(req,res){
-
-Photo.create({
+app.post('/upload/photo', upload.single('userPhoto'), function (req, res, next) {
+  // req.file is the `avatar` file
+  // req.body will hold the text fields, if there were any
+  Photo.create({
             img: fs.readFileSync(req.files.userPhoto.path),
             img.contentType : ‘image/png’
            
@@ -114,7 +111,8 @@ Photo.create({
                   console.log('saved prototipacao');
             }
         });
-    });
+})
+
 
 
 
