@@ -97,8 +97,8 @@ router.post('/upload/photo', upload.single('userPhoto'), function (req, res, nex
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   Photo.create({
-            img: fs.readFileSync(req.files.userPhoto.path),
-            img.contentType : ‘image/png’
+            img: fs.readFileSync(req.files.userPhoto.path)
+           
            
         }, function(err) {
             if (err) {
