@@ -6,7 +6,7 @@ var solucao = new Schema({
     ideia1: String,
     ideia2: String,
     ideia3: String,
-    ideiaForaCaixa: String
+    ideiaForaCaixa: String,
     clienteId: String
 
 });
