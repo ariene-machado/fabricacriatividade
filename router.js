@@ -93,12 +93,11 @@ router.post("/solucao", function(req, res) {
 
 
 //Upload photo
-router.post('/upload/photo', upload.single('userPhoto'), function (req, res, next) {
+router.post('/upload/photo', upload.single('userPhoto'), function (req, res) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   Photo.create({
-            img: fs.readFileSync(req.files.userPhoto.path)
-           
+            img: 'fs.readFileSync(req.files.userPhoto.path)'
            
         }, function(err) {
             if (err) {
