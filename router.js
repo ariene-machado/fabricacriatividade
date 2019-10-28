@@ -147,11 +147,29 @@ const doc = new PDFDocument()
   res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
   res.setHeader('Content-type', 'application/pdf')
 
-  const content = 'ESCREVER IDEIA FORA DA CAIXA'
-  doc.y = 300
-  doc.text(content, 50, 50)
-  .fontSize(25)
-   .fillColor("blue")
+  let title = 'ESCREVER IDEIA FORA DA CAIXA';
+ 
+
+// Criating cover pdf
+  .fontSize(45)
+  .fillColor("blue")
+  .text(title, 100, 100);
+
+
+.text('Autor: Ariene Machado', 300, 300);
+.fontSize(25)
+
+
+.text('Editora', 300, 300);
+.fontSize(18)
+  doc.image('http://arienemachado.com/testApp/imagens-site/logo.png', {
+   fit: [250, 300],
+   align: 'center',
+   valign: 'center'
+});
+  
+
+
   // Add another page
 	doc.addPage()
    .fontSize(25)
