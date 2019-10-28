@@ -93,7 +93,7 @@ router.post("/solucao", function(req, res) {
 
 
 //Upload photo
-router.post('/upload/photo', upload.single('userPhoto'), function (req, res) {
+router.post("/upload/photo", function (req, res) {
   // req.file is the `avatar` file
   // req.body will hold the text fields, if there were any
   Photo.create({
@@ -110,7 +110,7 @@ router.post('/upload/photo', upload.single('userPhoto'), function (req, res) {
                   console.log('saved prototipacao');
             }
         });
-})
+});
 
 
 
