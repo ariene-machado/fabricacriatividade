@@ -11,7 +11,7 @@ var upload = multer({ dest: 'uploads/' })
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
-var Ideacao = require('./model/ideacao');
+var Ideacao = require('./model/Ideacao');
 
 var upload = multer({ dest: 'uploads/' })
 
