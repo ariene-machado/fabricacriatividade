@@ -150,41 +150,33 @@ const doc = new PDFDocument()
   let title = 'ESCREVER IDEIA FORA DA CAIXA';
  
 
-// Criating cover pdf
-  .fontSize(45)
-  .fillColor("blue")
-  .text(title, 100, 100);
+//Criating cover pdf
+
+  doc.text(title, 100, 100);
+  doc.fontSize(45)
+  doc.fillColor("blue")
+
+  doc.text('Autor: Ariene Machado', 300, 300);
+  doc.fontSize(25)
 
 
-.text('Autor: Ariene Machado', 300, 300);
-.fontSize(25)
-
-
-.text('Editora', 300, 300);
-.fontSize(18)
+  doc.text('Editora', 300, 300);
+  doc.fontSize(18)
   doc.image('http://arienemachado.com/testApp/imagens-site/logo.png', {
-   fit: [250, 300],
-   align: 'center',
-   valign: 'center'
-});
-  
+   	fit: [250, 300],
+   	align: 'center',
+   	valign: 'center'
+   });
 
 
   // Add another page
 	doc.addPage()
-   .fontSize(25)
-   .text('Here is another page...', 100, 100);
-  doc.pipe(res)
-  doc.end()
+    doc.fontSize(25)
+    doc.text('Here is another page...', 100, 100);
+    doc.pipe(res)
+    doc.end()
 
-
-    });
-
-
-
-
-
-
+ });
 
 
 
