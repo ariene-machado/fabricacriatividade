@@ -11,7 +11,7 @@ var upload = multer({ dest: 'uploads/' })
 var Cliente = require('./model/cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
-var Photo = require('./model/Photo');
+//var Photo = require('./model/Photo');
 
 var upload = multer({ dest: 'uploads/' })
 
@@ -92,26 +92,6 @@ router.post("/solucao", function(req, res) {
 
 
 
-//Upload photo
-router.post("/photo", function (req, res) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  Photo.create({
-            data: 'fs.readFileSync(req.files.userPhoto.path)',
-            contentType:'test'
-           
-        }, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-
-            	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
-                  res.end();
-                  console.log('saved prototipacao');
-            }
-        });
-});
 
 
 
