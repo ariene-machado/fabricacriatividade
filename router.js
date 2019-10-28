@@ -106,7 +106,7 @@ router.post("/photo", function (req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/index.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
                   res.end();
                   console.log('saved prototipacao');
             }
