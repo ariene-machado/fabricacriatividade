@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // Define collection and schema for Photo
 var PhotoSchema = new Schema({
-    data: Buffer,
+    img: Buffer,
    contentType: String
 });
 

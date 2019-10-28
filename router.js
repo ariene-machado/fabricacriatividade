@@ -13,6 +13,9 @@ var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
 var Ideacao = require('./model/Ideacao');
 
+var Photo = require('./model/Photo');
+
+
 var upload = multer({ dest: 'uploads/' })
 
 
@@ -107,6 +110,29 @@ router.post("/ideacao", function(req, res) {
             }
         });
     });
+
+
+//Creating problema
+router.post("/photo", function(req, res) {
+        Photo.create({
+            img: req.body.userPhoto,
+            contentType: 'image/png'
+          
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+            	 res.statusCode = 302;
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/solucao.html");
+                  res.end();
+                  console.log('saved prototipacao');
+            }
+        });
+    });
+
+
+
 
 
 
