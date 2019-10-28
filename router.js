@@ -146,9 +146,12 @@ const doc = new PDFDocument()
   // If you use 'inline' here it will automatically open the PDF
   res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
   res.setHeader('Content-type', 'application/pdf')
-  const content = 'content file here Ariene'
+
+  const content = 'ESCREVER IDEIA FORA DA CAIXA'
   doc.y = 300
   doc.text(content, 50, 50)
+  .fontSize(25)
+   .fillColor("blue")
   // Add another page
 	doc.addPage()
    .fontSize(25)
