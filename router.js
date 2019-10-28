@@ -136,7 +136,7 @@ router.post("/photo", function(req, res) {
 
 
 //Creating PDF
-router.post("/pdf", function(req, res) {
+router.get("/pdf", function(req, res) {
         
 const doc = new PDFDocument()
   let filename = 'meupdf'
