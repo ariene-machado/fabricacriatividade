@@ -8,7 +8,7 @@ var router = express.Router();
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
-var Cliente = require('./model/Cliente');
+var Cliente = require('./model/cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
 var Photo = require('./model/Photo');
