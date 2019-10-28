@@ -11,11 +11,9 @@ var upload = multer({ dest: 'uploads/' })
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Solucao = require('./model/Solucao');
-var Photo = require('./model/Photo');
+var Ideacao = require('./model/ideacao');
 
 var upload = multer({ dest: 'uploads/' })
-
-
 
 
 //Creating client
@@ -83,20 +81,19 @@ router.post("/solucao", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
                   res.end();
-                  console.log('saved prototipacao');
+                  console.log('saved solucao');
             }
         });
     });
 
-
 //Creating problema
-router.post("/photo", function(req, res) {
+router.post("/ideacao", function(req, res) {
 
-        Photo.create({
-            data: req.body.userPhoto,
-            contentType: 'image/png'
+        Ideacao.create({
+            ideacao1: 'test1',
+            ideacao2: 'test2'
           
         }, function(err) {
             if (err) {
@@ -104,9 +101,9 @@ router.post("/photo", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/solucao.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/index.html");
                   res.end();
-                  console.log('saved prototipacao');
+                  console.log('saved ideacao');
             }
         });
     });
