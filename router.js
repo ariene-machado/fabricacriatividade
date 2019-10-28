@@ -16,6 +16,10 @@ var Ideacao = require('./model/Ideacao');
 var Photo = require('./model/Photo');
 
 
+
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
+
 var upload = multer({ dest: 'uploads/' })
 
 
@@ -111,7 +115,6 @@ router.post("/ideacao", function(req, res) {
         });
     });
 
-
 //Creating problema
 router.post("/photo", function(req, res) {
         Photo.create({
@@ -130,6 +133,29 @@ router.post("/photo", function(req, res) {
             }
         });
     });
+
+
+//Creating PDF
+router.post("/pdf", function(req, res) {
+        
+const doc = new PDFDocument()
+  let filename = 'meupdf'
+  // Stripping special characters
+  filename = encodeURIComponent(filename) + '.pdf'
+  // Setting response to 'attachment' (download).
+  // If you use 'inline' here it will automatically open the PDF
+  res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
+  res.setHeader('Content-type', 'application/pdf')
+  const content = 'content file here Ariene'
+  doc.y = 300
+  doc.text(content, 50, 50)
+  doc.pipe(res)
+  doc.end()
+
+
+    });
+
+
 
 
 
