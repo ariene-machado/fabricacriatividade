@@ -9,4 +9,4 @@ var ClienteSchema = new Schema({
     clienteId: String
 });
 
-module.exports = mongoose.model('cliente', ClienteSchema);
+module.exports = mongoose.model('Cliente', ClienteSchema);
