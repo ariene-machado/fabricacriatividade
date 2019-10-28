@@ -14,6 +14,8 @@ var Solucao = require('./model/Solucao');
 var Ideacao = require('./model/Ideacao');
 
 var Photo = require('./model/Photo');
+  var nomePdf2 = [];
+
 
 
 
@@ -135,11 +137,27 @@ router.post("/photo", function(req, res) {
     });
 
 
+//2 - Ler todas - Pisicologo
+router.get('/users', (req, res) => {
+    var user = [ ];
+    var x;
+    Cliente.find({})
+        .then((result) => {
+            res.json(result);
+            console.log('user :'+ result[0].nome);            
+        })
+        .catch((err) => {
+            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
+        });
+});
+
+
+
 //Creating PDF
 router.get("/pdf", function(req, res) {
-        
+
 const doc = new PDFDocument()
-  let filename = 'meupdf'
+  let filename = 'ideiaforacaixa'
   // Stripping special characters
   filename = encodeURIComponent(filename) + '.pdf'
   // Setting response to 'attachment' (download).
@@ -147,53 +165,128 @@ const doc = new PDFDocument()
   res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
   res.setHeader('Content-type', 'application/pdf')
 
-  let title = 'ESCREVER IDEIA FORA DA CAIXA';
- 
 
-//Criating cover pdf
-
-  doc.text(title, 100, 100);
-  doc.fontSize(45)
-  doc.fillColor("blue")
-
-  doc.text('Autor: Ariene Machado', 300, 300);
-  doc.fontSize(25)
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus.  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl.';
+const title = 'ESCREVER IDEIA FORA DA CAIXA';
 
 
-  doc.text('Editora', 300, 300);
-  doc.fontSize(18)
-  doc.image('http://arienemachado.com/testApp/imagens-site/logo.png', {
-   	fit: [250, 300],
-   	align: 'center',
-   	valign: 'center'
-   });
+ // Title
+doc.fontSize(24);
+doc.fillColor('purple')
+   .text(title, {
+     align: 'center'
+ })
 
+// Scale proprotionally to the specified width
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
+   .text('Nome do autor', 250, 415);
+    doc.fillColor('black')
 
-  // Add another page
-	doc.addPage()
-    doc.fontSize(25)
-    doc.text('Here is another page...', 100, 100);
+// Scale proprotionally to the specified width
+
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+doc.image('img/logo-purple.jpeg', 200, 650, {width: 200})
+doc.text('Editora',280, 615)
+doc.fillColor('black')
+
+  // Add page problema
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+    doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('PROBLEMA', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+   
+
+// Add page IDEAÇÃO
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+    doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('IDEAÇÃO', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+   
+
+// Add page SOLUÇÃO
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+    doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('SOLUÇÃO', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+
+// Add page PROTOTIPAÇÃO
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('PROTOTIPAÇÃO', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+    
+// Add page CONTRA CAPA
+
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('CONTRA CAPA', { 
+  	align: 'center'
+	}
+);
     doc.pipe(res)
     doc.end()
-
  });
 
-
-
-//Home page route
-router.get('/user', function(req, res) {
-    res.send('Home page user Ariene app fabrica!!!');
-});
-
-//Login page route
-//router.get('/login', function(req, res) {
-  //  res.send('Page login');
-//});
-
-//Problema page route
-//router.get('/problema', function(req, res) {
- //   res.send('Page problema');
-//});
 
 //Ideacao page route
 router.get('/ideacao', function(req, res) {
