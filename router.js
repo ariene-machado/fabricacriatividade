@@ -149,6 +149,10 @@ const doc = new PDFDocument()
   const content = 'content file here Ariene'
   doc.y = 300
   doc.text(content, 50, 50)
+  // Add another page
+	doc.addPage()
+   .fontSize(25)
+   .text('Here is another page...', 100, 100);
   doc.pipe(res)
   doc.end()
 
