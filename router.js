@@ -101,9 +101,9 @@ router.post("/solucao", function(req, res) {
 router.post("/ideacao", function(req, res) {
 
         Ideacao.create({
-            ideiaIdeacao: req.body.ideiaIdeacao,
-            tipoIdeacao: req.body.tipoIdeacao,
-            clienteId: req.body.idCliente
+            ideiaIdeacao: 'req.body.ideiaIdeacao',
+            tipoIdeacao: 'req.body.tipoIdeacao',
+            clienteId: 'req.body.idCliente'
           
         }, function(err) {
             if (err) {
