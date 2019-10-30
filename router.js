@@ -28,35 +28,24 @@ var upload = multer({ dest: 'uploads/' })
 //Creating client
 router.post("/login", function(req, res) {
 
+        Cliente.create({
+            nome: req.body.nome,
+            email: req.body.email,
+            whatsApp: req.body.whatsApp,
+            clienteId: req.body.idCliente
 
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
 
-create : async (req, res) =>{
-        const { nome, email, whatsApp } = req.body;
-        const user = await Cliente.create({
-            nome,
-            email,
-            whatsApp
-        })
-
-        return res.send(user)
-    },
-
-    find : async (req, res) => {
-        const user = await Cliente.find()
-        return res.send(user)
-    },
-    probByUser : async (req, res) => {
-       const { id } = '5db98e74b36171000415a62c';
-       const user = await Cliente.findById(id).populate('problema');
-
-        res.send(user.posts);
-    }
-
-
-
-
-
-        
+            	 res.statusCode = 302;
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/problema.html");
+                  res.end();
+                  console.log('saved login');
+            }
+        });
+    });
 
 
 //Creating problema
