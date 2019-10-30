@@ -10,7 +10,7 @@ var ProblemaSchema = new Schema({
     porque3: String,
     problemaRaiz: String,
     clienteId: String,
-    user :{
+    userId :{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Cliente'
     }

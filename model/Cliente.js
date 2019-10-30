@@ -6,10 +6,7 @@ var ClienteSchema = new Schema({
     nome: String,
     email: String,
     whatsApp: String,
-    clienteId: String,
-    problema : [
-        {type: mongoose.Schema.Types.ObjectId,ref:'Problema'}
-    ]
+    clienteId: String
 });
 
 module.exports = mongoose.model('Cliente', ClienteSchema);
