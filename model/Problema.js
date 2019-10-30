@@ -9,7 +9,11 @@ var ProblemaSchema = new Schema({
     porque2: String,
     porque3: String,
     problemaRaiz: String,
-    clienteId: String
+    clienteId: String,
+    user :{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Cliente'
+    }
 
 });
 
