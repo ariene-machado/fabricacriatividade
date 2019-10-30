@@ -66,7 +66,7 @@ router.post("/problema", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/solucao.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
                   res.end();
                   console.log('saved problema');
             }
@@ -90,7 +90,7 @@ router.post("/solucao", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
                   res.end();
                   console.log('saved solucao');
             }
@@ -101,8 +101,9 @@ router.post("/solucao", function(req, res) {
 router.post("/ideacao", function(req, res) {
 
         Ideacao.create({
-            ideacao1: 'test1',
-            ideacao2: 'test2'
+            ideiaIdeacao: req.body.ideiaIdeacao,
+            tipoIdeacao: req.body.tipoIdeacao,
+            clienteId: req.body.idCliente
           
         }, function(err) {
             if (err) {
@@ -110,7 +111,7 @@ router.post("/ideacao", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/index.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/solucao.html");
                   res.end();
                   console.log('saved ideacao');
             }
