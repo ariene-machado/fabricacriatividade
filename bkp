@@ -1,3 +1,5 @@
+
+
 // page route module
 
 
@@ -16,55 +18,41 @@ var Ideacao = require('./model/Ideacao');
 var Photo = require('./model/Photo');
   var nomePdf2 = [];
 
+
+
+
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
 var upload = multer({ dest: 'uploads/' })
 
-const Author = require("./model/Author");
-const Story = require("./model/Story");
 
-
-router.post("/author", async (request, response) => {
-	var author = {name:"John"};
-    try {
-        var createAuthor = new Author(author);
-        var result = await createAuthor.save();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-});
-
-router.post("/story", async (request, response) => {
-
-//Bob now exists, so lets create a story
-  var story = new Story({
-    title: "Bob goes sledding",
-    author: createAuthor._id    // assign the _id from the our author Bob. This ID is created by default!
+const createCLiente = function(nome, email, whatsApp) {
+  const cliente = new Customer({
+    nome,
+    email,
+    whatsApp
   });
 
-  story.save(function (err) {
-    if (err) return handleError(err);
-    // Bob now has his story
+  return cliente.save();
+};
+
+const createProblema = function(problema1, porque1, porque2, porque3, problemaRaiz  ) {
+  const problema = new problema({
+    cardCode,
+    customer
   });
-});
+
+  return identifier.save();
+};
 
 
 
-
-router.get("/person", async (request, response) => {
-    try {
-        var result = await Customer.find().exec();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-}); 
 
 
 //Creating client
 router.post("/login", function(req, res) {
+
         Cliente.create({
             nome: req.body.nome,
             email: req.body.email,
@@ -85,11 +73,15 @@ router.post("/login", function(req, res) {
     });
 
 
-//Creating problema 1
+//Creating problema
 router.post("/problema", function(req, res) {
 
         Problema.create({
             problema1: req.body.problema1,
+            porque1: req.body.porque1,
+            porque2: req.body.porque2,
+            porque3: req.body.porque3,
+            problemaRaiz: req.body.problemaRaiz,
             clienteId: req.body.idCliente
 
         }, function(err) {
@@ -98,7 +90,7 @@ router.post("/problema", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/problema2.html");
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
                   res.end();
                   console.log('saved problema');
             }
@@ -106,51 +98,7 @@ router.post("/problema", function(req, res) {
     });
 
 
-//Creating problema 2
-router.post("/problema2", function(req, res) {
-
-        Problema.create({
-            problema2: req.body.problema2,
-            clienteId: req.body.idCliente
-
-        }, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-
-            	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
-                  res.end();
-                  console.log('saved problema2');
-            }
-        });
-    });
-
-//Creating ideacao
-router.post("/ideacao", function(req, res) {
-
-        Ideacao.create({
-            ideiaIdeacao: req.body.ideiaIdeacao,
-            tipoIdeacao: req.body.tipoIdeacao,
-            clienteId: req.body.idCliente
-          
-        }, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-
-            	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
-                  res.end();
-                  console.log('saved ideacao');
-            }
-        });
-    });
-
-
-
-
-//Creating solucao
+//Creating problema
 router.post("/solucao", function(req, res) {
 
         Solucao.create({
@@ -173,7 +121,26 @@ router.post("/solucao", function(req, res) {
         });
     });
 
+//Creating problema
+router.post("/ideacao", function(req, res) {
 
+        Ideacao.create({
+            ideiaIdeacao: req.body.ideiaIdeacao,
+            tipoIdeacao: req.body.tipoIdeacao,
+            clienteId: req.body.idCliente
+          
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+            	 res.statusCode = 302;
+            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
+                  res.end();
+                  console.log('saved ideacao');
+            }
+        });
+    });
 
 //Creating problema
 router.post("/photo", function(req, res) {
