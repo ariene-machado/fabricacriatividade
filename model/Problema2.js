@@ -3,8 +3,8 @@ var Schema = mongoose.Schema;
 
 
 // Define collection and schema for Problema
-var ProblemaSchema = new Schema({
-    problema1: String,
+var Problema2Schema = new Schema({
+    problema2: String
     clienteId: String,
     userId :{
         type:mongoose.Schema.Types.ObjectId,
@@ -13,7 +13,6 @@ var ProblemaSchema = new Schema({
 
 });
 
-
-module.exports = mongoose.model('Problema', ProblemaSchema);
+module.exports = mongoose.model('Problema2', Problema2Schema);
 
 

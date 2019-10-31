@@ -10,6 +10,8 @@ var upload = multer({ dest: 'uploads/' })
 
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
+var Problema2 = require('./model/Problema2');
+
 var Solucao = require('./model/Solucao');
 var Ideacao = require('./model/Ideacao');
 
@@ -109,7 +111,7 @@ router.post("/problema", function(req, res) {
 //Creating problema 2
 router.post("/problema2", function(req, res) {
 
-        Problema.create({
+        Problema2.create({
             problema2: req.body.problema2,
             clienteId: req.body.idCliente
 
