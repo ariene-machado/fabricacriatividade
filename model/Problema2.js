@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 // Define collection and schema for Problema
 var Problema2Schema = new Schema({
-    problema2: String
+    problema2: String,
     clienteId: String,
     userId :{
         type:mongoose.Schema.Types.ObjectId,
