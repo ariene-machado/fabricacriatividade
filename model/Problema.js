@@ -5,12 +5,7 @@ var Schema = mongoose.Schema;
 // Define collection and schema for Problema
 var ProblemaSchema = new Schema({
     problema1: String,
-    clienteId: String,
-    userId :{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Cliente'
-    }
-
+    clienteId: String
 });
 
 
