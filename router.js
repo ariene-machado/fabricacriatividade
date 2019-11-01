@@ -154,7 +154,7 @@ router.post("/ideacao", function(req, res) {
 //get ideas criadas
 
 //2 - Ler todas - Pisicologo
-router.get('/ideas/id', (req, res) => {
+router.get('/ideas/:id', (req, res) => {
     var user = [ ];
     var x;
     var clienteId = req.params.id
