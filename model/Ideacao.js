@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 // Define collection and schema for Solucao
 var ideacao = new Schema({
     ideiaIdeacao: String,
+    ideiaIdeacao2: String,
     tipoIdeacao: String,
     clienteId: String
 

@@ -133,6 +133,7 @@ router.post("/ideacao", function(req, res) {
 
         Ideacao.create({
             ideiaIdeacao: req.body.ideiaIdeacao,
+            ideiaIdeacao2: req.body.ideiaIdeacao2,
             tipoIdeacao: req.body.tipoIdeacao,
             clienteId: req.body.idCliente
           
