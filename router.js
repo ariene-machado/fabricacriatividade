@@ -154,10 +154,11 @@ router.post("/ideacao", function(req, res) {
 //get ideas criadas
 
 //2 - Ler todas - Pisicologo
-router.get('/ideas', (req, res) => {
+router.get('/ideas/:id', (req, res) => {
     var user = [ ];
     var x;
-    Ideacao.find({})
+    var clienteId = req.params.id
+    Ideacao.find({clienteId})
         .then((result) => {
             res.json(result);
             console.log('json :'+ result);
