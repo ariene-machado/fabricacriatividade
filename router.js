@@ -151,6 +151,23 @@ router.post("/ideacao", function(req, res) {
     });
 
 
+//get ideas criadas
+
+//2 - Ler todas - Pisicologo
+router.get('/ideas', (req, res) => {
+    var user = [ ];
+    var x;
+    Ideacao.find({})
+        .then((result) => {
+            res.json(result);
+            console.log('json :'+ result);
+            res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
+            res.end();            
+        })
+        .catch((err) => {
+            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
+        });
+});
 
 
 //Creating solucao
