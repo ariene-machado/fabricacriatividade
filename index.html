@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Stand fora da caixa - Fabrica de Criatividade</title>
+    <link rel="stylesheet" href="style-app.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,700i,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,600,700,800,800i&display=swap" rel="stylesheet">
+
+</head>
+<?php header('Access-Control-Allow-Origin: *'); ?>
+
+    <body onload="createStorageId()">
+
+        <div class="container p-5">
+
+            <div class="d-flex">
+
+                <div class="row">
+                    <header>
+                        <div class="col-sm-12">
+                            <a hre="#"><img src="imagens-site/logo.png" class="logo"></a>
+                        </div>
+                    </header>
+                    <div class="col-sm-12">
+                        <section class="title pt-4 text-center">
+                            <h2>Entre e tenha ideias fora da caixa</h2>
+                        </section>
+                        <section class="form mt-4">
+                            <form method="POST" action="https://app-criatividade.herokuapp.com/login">
+                                <div class="form-group">
+
+                                    <input type="hidden" class="form-control mb-3 p-3" id="idCliente" name="idCliente">
+
+                                    <input type="nome" class="form-control mb-3 p-3" id="nome" aria-describedby="emailHelp" placeholder="Nome" name="nome" required>
+                                    <input type="email" class="form-control mb-3 p-3" id="email" aria-describedby="emailHelp" placeholder="Email" name="email" required>
+                                    <input type="Whatsapp" class="form-control mb-3 p-3" id="whatsApp" aria-describedby="emailHelp" placeholder="(0XX)   XXXXX-XXXX" name="whatsApp" required>
+                                </div>
+                                <button type="submit" class="btn entrar p-3 mt-3" onclick="sendData()">ENTRAR</button>
+                            </form>
+                        </section>
+                    </div>
+
+                    <footer class="mt-4">
+                        Desenvolvido por <a href="http://www.arienemachado.com" target="_blank">Ariene Machado</a>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="connect-api.js"></script>
+
+    </body>
+
+</html>
