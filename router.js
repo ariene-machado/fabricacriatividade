@@ -8,6 +8,8 @@ var router = express.Router();
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
+http = require('http');
+
 var formidable = require('formidable');
 
 
@@ -197,12 +199,8 @@ router.post("/solucao", function(req, res) {
         });
     });
 
+  router.post('/uploadfile', function (req, res){
 
-
-
-
-router.post('/uploadfile', function (req, res){
-  
     var form = new formidable.IncomingForm();
 
     form.parse(req);
@@ -214,9 +212,8 @@ router.post('/uploadfile', function (req, res){
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
     });
-
     res.sendFile(__dirname + '/');
-  
+
 })
 
 
