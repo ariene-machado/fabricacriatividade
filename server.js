@@ -10,9 +10,6 @@ var formidable = require("formidable");
 var fs = require("fs");
 var grid = require("gridfs-stream");
 
-var http = require('http');
-var formidable = require('formidable');
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -8,6 +8,9 @@ var router = express.Router();
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
+var formidable = require('formidable');
+
+
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Problema2 = require('./model/Problema2');
