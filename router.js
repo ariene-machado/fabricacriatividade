@@ -208,13 +208,13 @@ router.post('/uploadfile', upload.single('myImage'), (req, res) => {
       contentType: req.file.mimetype,
       image:  new Buffer(encode_image, 'base64')
    };
-Cliente.insertOne(finalImg, (err, result) => {
+Photo.create(finalImg, (err, result) => {
     console.log(result)
  
     if (err) return console.log(err)
  
     console.log('saved to database')
-    res.redirect('http://arienemachado.com/testApp/prototipacao.html')
+    res.redirect('/')
    
      
   })
