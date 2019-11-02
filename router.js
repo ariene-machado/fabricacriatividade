@@ -214,8 +214,8 @@ Photo.create(finalImg, (err, result) => {
     if (err) return console.log(err)
  
     console.log('saved to database')
-    res.redirect('/')
-   
+    res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
+  
      
   })
 })
