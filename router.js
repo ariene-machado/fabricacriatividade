@@ -221,6 +221,20 @@ Photo.create(finalImg, (err, result) => {
 })
 
 
+router.get('/photo/:id', (req, res) => {
+var filename = req.params.id;
+ 
+Photo.findOne({'_id': ObjectId(filename) }, (err, result) => {
+ 
+    if (err) return console.log(err)
+ 
+   res.contentType('image/jpeg');
+   res.send(result.image.buffer)
+   
+    
+  })
+})
+
 
 
 //2 - Ler todas - Pisicologo
