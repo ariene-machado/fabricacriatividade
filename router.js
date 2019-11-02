@@ -195,23 +195,11 @@ router.post("/solucao", function(req, res) {
     });
 
 
-router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
-  const file = req.file
-  if (!file) {
-    const error = new Error('Please upload a file')
-    error.httpStatusCode = 400
-    return next(error)
-
-  }
-
-
-    res.send(file)
- 
-})
 
 
 
-router.post('/uploadphoto', upload.single('picture'), (req, res) => {
+
+router.post('/uploadfile', upload.single('myImage'), (req, res) => {
     var img = fs.readFileSync(req.file.path);
  	var encode_image = img.toString('base64');
  // Define a JSONobject for the image attributes for saving to database
@@ -226,7 +214,7 @@ Cliente.insertOne(finalImg, (err, result) => {
     if (err) return console.log(err)
  
     console.log('saved to database')
-    res.redirect('/')
+    res.redirect('http://arienemachado.com/testApp/prototipacao.html')
    
      
   })
