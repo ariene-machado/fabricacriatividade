@@ -215,7 +215,7 @@ Photo.create(finalImg, (err, result) => {
  
     console.log('saved to database')
     res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
-  
+  	res.end();
      
   })
 })
