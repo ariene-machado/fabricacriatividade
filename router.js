@@ -227,7 +227,7 @@ Photo.create(finalImg, (err, result) => {
 router.get('/photo/:id', (req, res) => {
    var filename = req.params.id;
 
-    Photo.find({'_id'})
+    Photo.find({filename})
         .then((result) => {
             res.contentType('image/jpeg');
    			res.send(result.image.buffer)
