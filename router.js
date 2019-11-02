@@ -221,19 +221,22 @@ Photo.create(finalImg, (err, result) => {
 })
 
 
+
+
+//2 - Ler todas - Pisicologo
 router.get('/photo/:id', (req, res) => {
-var filename = req.params.id;
- 
-Photo.findOne({'_id'}, (err, result) => {
- 
-    if (err) return console.log(err)
- 
-   res.contentType('image/jpeg');
-   res.send(result.image.buffer)
-   
-    
-  })
-})
+   var filename = req.params.id;
+
+    Photo.find({'_id'})
+        .then((result) => {
+            res.contentType('image/jpeg');
+   			res.send(result.image.buffer)
+          
+        })
+        .catch((err) => {
+            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
+        });
+});
 
 
 
