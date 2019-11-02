@@ -215,7 +215,7 @@ router.post('/uploadfile', function (req, res){
         console.log('Uploaded ' + file.name);
     });
 
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/');
   
 })
 
@@ -391,7 +391,7 @@ doc.fillColor('purple')
 
 
 //Ideacao page route
-router.get('/ideacao', function(req, res) {
+router.get('/', function(req, res) {
     res.send('Page ideacao');
 });
 
