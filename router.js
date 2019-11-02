@@ -195,25 +195,20 @@ router.post("/solucao", function(req, res) {
     });
 
 
+router.post('/uploadfile', upload.single('myFile'), (req, res, next) => {
+  const file = req.file
+  if (!file) {
+    const error = new Error('Please upload a file')
+    error.httpStatusCode = 400
+    return next(error)
 
-//Creating problema
-router.post("/photo", function(req, res) {
-        Photo.create({
-            img: req.body.userPhoto,
-            contentType: 'image/png'
-          
-        }, function(err) {
-            if (err) {
-                console.log(err);
-            } else {
+  }
 
-            	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/solucao.html");
-                  res.end();
-                  console.log('saved prototipacao');
-            }
-        });
-    });
+
+    res.send(file)
+ 
+})
+
 
 
 //2 - Ler todas - Pisicologo

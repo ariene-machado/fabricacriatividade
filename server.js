@@ -25,6 +25,17 @@ require('dotenv').config();
 var mongoose = require('mongoose');
 
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
+
 
 //Set up default mongoose connection
 var mongoDB = 'mongodb://127.0.0.1/ClientDb';
