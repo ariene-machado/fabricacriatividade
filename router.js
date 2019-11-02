@@ -224,7 +224,7 @@ Photo.create(finalImg, (err, result) => {
 router.get('/photo/:id', (req, res) => {
 var filename = req.params.id;
  
-Photo.findOne({'_id': ObjectId(filename) }, (err, result) => {
+Photo.findOne({'_id'}, (err, result) => {
  
     if (err) return console.log(err)
  
