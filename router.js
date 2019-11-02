@@ -198,26 +198,22 @@ router.post("/solucao", function(req, res) {
 
 
 
-
-router.post('/uploadfile', upload.single('myImage'), (req, res) => {
-    var img = fs.readFileSync(req.file.path);
- 	var encode_image = img.toString('base64');
- // Define a JSONobject for the image attributes for saving to database
+router.post('/uploadfile', function (req, res){
   
- var finalImg = {
-      contentType: req.file.mimetype,
-      image:  new Buffer(encode_image, 'base64')
-   };
-Photo.create(finalImg, (err, result) => {
-    console.log(result)
- 
-    if (err) return console.log(err)
- 
-    console.log('saved to database')
-    res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
-  	res.end();
-     
-  })
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/uploads/' + file.name;
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name);
+    });
+
+    res.sendFile(__dirname + 'http://arienemachado.com/testApp/index.html'); 
+  
 })
 
 
