@@ -8,7 +8,6 @@ var router = express.Router();
 var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
-var formidable = require('formidable');
 
 
 var Cliente = require('./model/Cliente');
@@ -215,9 +214,8 @@ router.post('/uploadfile', function (req, res){
         console.log('Uploaded ' + file.name);
     });
 
-                res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
-                    res.end();
-
+    res.sendFile(__dirname + '/index.html');
+  
 })
 
 
