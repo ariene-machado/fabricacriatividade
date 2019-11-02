@@ -9,6 +9,8 @@ var multer  = require('multer')
 var upload = multer({ dest: 'uploads/' })
 
 http = require('http');
+const path = require('path');
+
 
 var formidable = require('formidable');
 
@@ -206,15 +208,18 @@ router.post("/solucao", function(req, res) {
     form.parse(req);
 
     form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/uploads/' + file.name;
+        file.path = __dirname + '/data/' + file.name;
     });
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
     });
-    res.sendFile(__dirname + '/');
 
-})
+    return res.json(200, {
+              result: 'Upload Success'
+    });
+});
+
 
 
 
