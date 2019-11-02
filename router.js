@@ -215,8 +215,9 @@ router.post('/uploadfile', function (req, res){
         console.log('Uploaded ' + file.name);
     });
 
-    res.sendFile(__dirname + 'http://arienemachado.com/testApp/index.html'); 
-  
+                res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
+                    res.end();
+
 })
 
 
