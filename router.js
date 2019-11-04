@@ -174,6 +174,14 @@ cloudinary.uploader.upload('pizza.jpg', { tags: 'basic_sample' })
     console.log();
     console.log("** File Upload (Promise)");
     if (err) { console.warn(err); }
+    else {
+
+               res.statusCode = 302;
+                res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
+                  res.end();
+                  console.log('saved solucao');
+            }
+
   });
 
 });
