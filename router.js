@@ -166,7 +166,7 @@ router.post("/solucao", function(req, res) {
     form.parse(req);
 
     form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/data/' + file.name;
+        file.path = 'http://sfc.fabricadecriatividade.com.br/' + '/data/' + file.name;
     });
 
     form.on('file', function (name, file){
@@ -176,41 +176,6 @@ router.post("/solucao", function(req, res) {
                   res.end();
     });
 
-});
-
-
-
-
-
-//2 - Ler todas - Pisicologo
-router.get('/photo/:id', (req, res) => {
-   var filename = req.params.id;
-
-    Photo.find({filename})
-        .then((result) => {
-            res.contentType('image/jpeg');
-   			res.send(result.image.buffer)
-          
-        })
-        .catch((err) => {
-            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
-        });
-});
-
-
-
-//2 - Ler todas - Pisicologo
-router.get('/users', (req, res) => {
-    var user = [ ];
-    var x;
-    Cliente.find({})
-        .then((result) => {
-            res.json(result);
-            console.log('user :'+ result[0].nome);            
-        })
-        .catch((err) => {
-            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
-        });
 });
 
 
