@@ -5,8 +5,6 @@ var express = require('express');
 var app = express();
 var router = express.Router();
 
-var multer  = require('multer')
-var upload = multer({ dest: 'uploads/' })
 
 http = require('http');
 const path = require('path');
@@ -27,7 +25,6 @@ var Photo = require('./model/Photo');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
-var upload = multer({ dest: 'uploads/' })
 
 
 //Creating client
@@ -166,7 +163,7 @@ router.post("/solucao", function(req, res) {
     form.parse(req);
 
     form.on('fileBegin', function (name, file){
-        file.path = 'http://sfc.fabricadecriatividade.com.br' + '/data/' + file.name;
+        file.path = __dirname + '/data/' + file.name;
     });
 
     form.on('file', function (name, file){
