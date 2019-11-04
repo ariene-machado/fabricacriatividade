@@ -23,53 +23,11 @@ var Solucao = require('./model/Solucao');
 var Ideacao = require('./model/Ideacao');
 
 var Photo = require('./model/Photo');
-  var nomePdf2 = [];
 
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
 var upload = multer({ dest: 'uploads/' })
-
-const Author = require("./model/Author");
-const Story = require("./model/Story");
-
-
-router.post("/author", async (request, response) => {
-	var author = {name:"John"};
-    try {
-        var createAuthor = new Author(author);
-        var result = await createAuthor.save();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-});
-
-router.post("/story", async (request, response) => {
-
-//Bob now exists, so lets create a story
-  var story = new Story({
-    title: "Bob goes sledding",
-    author: createAuthor._id    // assign the _id from the our author Bob. This ID is created by default!
-  });
-
-  story.save(function (err) {
-    if (err) return handleError(err);
-    // Bob now has his story
-  });
-});
-
-
-
-
-router.get("/person", async (request, response) => {
-    try {
-        var result = await Customer.find().exec();
-        response.send(result);
-    } catch (error) {
-        response.status(500).send(error);
-    }
-}); 
 
 
 //Creating client
@@ -86,7 +44,7 @@ router.post("/login", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/problema.html");
+            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/problema.html");
                   res.end();
                   console.log('saved login');
             }
@@ -107,7 +65,7 @@ router.post("/problema", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/problema2.html");
+            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/problema2.html");
                   res.end();
                   console.log('saved problema');
             }
@@ -128,7 +86,7 @@ router.post("/problema2", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
+            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/ideacao.html");
                   res.end();
                   console.log('saved problema2');
             }
@@ -150,7 +108,7 @@ router.post("/ideacao", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
+            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/ideacao.html");
                   res.end();
                   console.log('saved ideacao');
             }
@@ -169,7 +127,7 @@ router.get('/ideas/:id', (req, res) => {
         .then((result) => {
             res.json(result);
             console.log('json :'+ result);
-            res.setHeader("Location", "http://arienemachado.com/testApp/ideacao.html");
+            res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/ideacao.html");
             res.end();            
         })
         .catch((err) => {
@@ -194,7 +152,7 @@ router.post("/solucao", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://arienemachado.com/testApp/prototipacao.html");
+            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
                   res.end();
                   console.log('saved solucao');
             }
@@ -213,11 +171,11 @@ router.post("/solucao", function(req, res) {
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
+         res.statusCode = 302;
+                res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
+                  res.end();
     });
 
-    return res.json(200, {
-              result: 'Upload Success'
-    });
 });
 
 
@@ -285,6 +243,9 @@ doc.fillColor('purple')
 doc.moveDown();
 // Scale the image
 doc.fontSize(18);
+
+var imgPath = 'data/'
+
 doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
    .text('Nome do autor', 250, 415);
     doc.fillColor('black')
