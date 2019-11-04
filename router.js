@@ -164,6 +164,7 @@ router.post("/solucao", function(req, res) {
 
     form.on('fileBegin', function (name, file){
         file.path = __dirname + '/data/' + file.name;
+        console.log('file path ' +file.path);
     });
 
     form.on('file', function (name, file){
