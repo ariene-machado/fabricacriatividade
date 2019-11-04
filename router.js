@@ -187,13 +187,7 @@ function addPhoto(imgUrl){
         }, function(err) {
             if (err) {
                 console.log(err);
-            } else {
-
-               res.statusCode = 302;
-                res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
-                  res.end();
-                  console.log('saved solucao');
-            }
+            } 
         });
     });
 }
