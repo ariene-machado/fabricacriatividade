@@ -12,6 +12,8 @@ var grid = require("gridfs-stream");
 
 http = require('http');
 const path = require('path');
+var cloudinary = require('cloudinary').v2
+
 
 
 app.use(bodyParser.json());
@@ -42,6 +44,14 @@ var db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+cloudinary.config({
+  cloud_name: 'hmsjccygb',
+  api_key: '271288152319538',
+  api_secret: '9lJbcPjXQOWJlxstpLgNw3XGIQA'
+});
+
 
 
 app.use('/', router_user);

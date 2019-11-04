@@ -11,6 +11,8 @@ const path = require('path');
 
 
 var formidable = require('formidable');
+var cloudinary = require('cloudinary').v2
+
 
 
 var Cliente = require('./model/Cliente');
@@ -169,6 +171,29 @@ router.post("/solucao", function(req, res) {
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
+
+var photo = new Photo(req.body);
+  // Get temp file path
+  var imageFile = file.name;
+  // Upload file to Cloudinary
+  cloudinary.uploader.upload(imageFile, { tags: 'express_sample' })
+    .then(function (image) {
+      console.log('** file uploaded to Cloudinary service');
+      console.dir(image);
+      photo.image = image;
+      // Save photo with image metadata
+      return photo.save();
+    })
+    .then(function () {
+      console.log('** photo saved');
+    })
+    .finally(function () {
+      res.render('photos/create_through_server', { photo: photo, upload: photo.image });
+    });
+
+
+
+
          res.statusCode = 302;
                 res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
                   res.end();
