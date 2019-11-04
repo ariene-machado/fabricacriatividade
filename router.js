@@ -166,7 +166,7 @@ router.post("/solucao", function(req, res) {
     form.parse(req);
 
     form.on('fileBegin', function (name, file){
-        file.path = 'http://sfc.fabricadecriatividade.com.br/' + '/data/' + file.name;
+        file.path = 'http://sfc.fabricadecriatividade.com.br' + '/data/' + file.name;
     });
 
     form.on('file', function (name, file){
