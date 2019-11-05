@@ -162,12 +162,11 @@ router.post("/solucao", function(req, res) {
 
 
 //Creating solucao
-router.post("/addPhoto", function(req, res) {
+router.post("/uploadfile", function(req, res) {
 
 cloudinary.uploader.upload('pizza.jpg', { tags: 'basic_sample' })
-
-
-        Photo.create({
+  
+  Photo.create({
             imageUrl: 'url img',
             clienteId: 'client id'
             
@@ -186,7 +185,7 @@ cloudinary.uploader.upload('pizza.jpg', { tags: 'basic_sample' })
     });
   
 
-router.post('/uploadfile', function (req, res){
+router.post('/uploadfile2', function (req, res){
     // File upload (example for promise api)
 cloudinary.uploader.upload('pizza.jpg', { tags: 'basic_sample' })
   .then(function (image) {
