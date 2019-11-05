@@ -6,6 +6,8 @@ var ClienteSchema = new Schema({
     nome: String,
     email: String,
     whatsApp: String,
+    empresa: String,
+ 	cargo: String,
     clienteId: String
 });
 
