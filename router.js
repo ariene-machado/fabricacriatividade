@@ -162,22 +162,39 @@ router.post("/solucao", function(req, res) {
 
     // File upload (example for promise api)
 
-var file = "http://sfc.fabricadecriatividade.com.br/imagens-site/logo.png";
 
-cloudinary.uploader.upload(file).then((result) => {
-const image = result.url;
-return res.status(200).json({
-messge: 'Your image has been uploded successfully to cloudinary',
-data: {
-image
-}
-})
-}).catch((err) => res.status(400).json({
-messge: 'someting went wrong while processing your request',
-data: {
-err
-}
-}))
+router.post("/uploadfile", function(req, res, next) {
+    const fileGettingUploaded = 'http://sfc.fabricadecriatividade.com.br/imagens-site/prototipacao.png' ;
+
+    cloudinary.uploader.upload(fileGettingUploaded, function(result, error) {
+        if (result) {
+            res.status(200).json(result);
+        } else {
+            res.status(500).json(error);
+        }
+    });
+});
+
+
+//Creating solucao
+router.post("/uploadfile2", function(req, res) {
+
+        Photo.create({
+            imageUrl: img,
+            clienteId: req.body.idCliente
+
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+               res.statusCode = 302;
+                res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
+                  res.end();
+                  console.log('saved solucao');
+            }
+        });
+    });
 
 
 
