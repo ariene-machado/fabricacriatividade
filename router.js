@@ -160,7 +160,6 @@ router.post("/solucao", function(req, res) {
 
 
 
-router.post('/uploadfile', function (req, res){
     // File upload (example for promise api)
 
 var file = "http://sfc.fabricadecriatividade.com.br/imagens-site/logo.png";
@@ -180,8 +179,6 @@ err
 }
 }))
 
-
-});
 
 
 
