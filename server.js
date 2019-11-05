@@ -53,8 +53,8 @@ cloudinary.config({
 });
 
 
-
 app.use('/', router_user);
+
 
 
 app.listen(PORT, function() {
