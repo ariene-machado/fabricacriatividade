@@ -158,10 +158,35 @@ router.post("/solucao", function(req, res) {
         });
     });
 
+
+
+
+//Creating solucao
+router.post("/addPhoto", function(req, res) {
+
+cloudinary.uploader.upload('pizza.jpg', { tags: 'basic_sample' })
+
+
+        Photo.create({
+            imageUrl: 'url img',
+            clienteId: 'client id'
+            
+        }, function(err) {
+            if (err) {
+                console.log(err);
+            } else {
+
+               res.statusCode = 302;
+                res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
+                  res.end();
+                  console.log('saved solucao');
+                   
+            }
+        });
+    });
   
 
 router.post('/uploadfile', function (req, res){
-
     // File upload (example for promise api)
 cloudinary.uploader.upload('pizza.jpg', { tags: 'basic_sample' })
   .then(function (image) {
