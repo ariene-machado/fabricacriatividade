@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 
 // Define collection and schema for Photo
-var PhotoSchema = new Schema({
+var PhotoSchema2 = new Schema({
     clienteId: String,
     imgURL: String,
     imgId: String,
@@ -11,5 +11,4 @@ var PhotoSchema = new Schema({
 
 });
 
-
-module.exports = mongoose.model('Photo', PhotoSchema);
+module.exports = mongoose.model('Photo2', PhotoSchema2);

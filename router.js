@@ -23,6 +23,8 @@ var Solucao = require('./model/Solucao');
 var Ideacao = require('./model/Ideacao');
 
 var Photo = require('./model/Photo');
+var Photo2 = require('./model/Photo2');
+
 
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
@@ -169,11 +171,7 @@ router.post("/solucao", function(req, res) {
 //Creating prototipacao 1
 router.post("/prototipacao", function(req, res) {
 
-    var photo = 'http://sfc.fabricadecriatividade.com.br/imagens-site/logo.png';
-    var idUser = req.body.idCliente;
     var form = new formidable.IncomingForm();
-
-    console.log(' id cliente '+idUser);
 
     form.parse(req);
 
@@ -188,6 +186,8 @@ router.post("/prototipacao", function(req, res) {
 var photo = new Photo(req.body.imageFile);
   // Get temp file path
   var imageFile = file.path;
+
+
   // Upload file to Cloudinary
   cloudinary.uploader.upload(imageFile, { tags: 'express_sample' })
     .then(function (image) {
@@ -196,13 +196,15 @@ var photo = new Photo(req.body.imageFile);
       console.log('URL image: '+image.url);
       photo.image = image;
       var photoLink = image.url;
+      var fileImage1 = file.name
 
       var imgId = Date.now() + Math.random()
       //Add to database
       Photo.create({
             clienteId: req.body.idCliente,
             imgURL: image.url,
-            imgId: imgId
+            imgId: fileImage1,
+            fileImage1: fileImage1
         })
 
       // Save photo with image metadata
@@ -221,18 +223,92 @@ var photo = new Photo(req.body.imageFile);
   });
 
 
+//Creating prototipacao 2
+router.post("/prototipacao2", function(req, res) {
 
-//- Ler todas image prototipo
+    var form = new formidable.IncomingForm();
 
-router.get('/image/:id', (req, res) => {
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/data/' + file.name;
+        console.log('file path ' +file.path);
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name);
+
+var photo = new Photo(req.body.imageFile);
+  // Get temp file path
+  var imageFile = file.path;
+
+
+  // Upload file to Cloudinary
+  cloudinary.uploader.upload(imageFile, { tags: 'photo2' })
+    .then(function (image) {
+      console.log('** file uploaded to Cloudinary service');
+      console.dir(image);
+      console.log('URL image: '+image.url);
+      photo.image = image;
+      var photoLink = image.url;
+      var fileImage1 = file.name
+
+      var imgId = Date.now() + Math.random()
+      //Add to database
+      Photo2.create({
+            clienteId: req.body.idCliente,
+            imgURL: image.url,
+            imgId: fileImage1,
+            fileImage1: fileImage1
+        })
+
+      // Save photo with image metadata
+      //return 
+    })
+    .then(function () {
+      console.log('** photo saved');
+    })
+    .finally(function () {
+      res.render('photos/create_through_server', { photo: photo, upload: photo.image });
+    });
+         res.statusCode = 302;
+         res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/livro.html");
+         res.end();
+    });
+  });
+
+
+
+//- Ler todas image prototipo1
+
+router.get('/image/:imgId', (req, res) => {
     
-     var imgId = req.params.id
+     var imgId = req.params.imgId
 
     Photo.find({imgId})
         .then((result) => {
             res.json(result);
             console.log('json :'+ result);
             res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
+            res.end();            
+        })
+        .catch((err) => {
+            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
+        });
+});
+
+
+//- Ler todas image prototipo2
+
+router.get('/image2/:imgId', (req, res) => {
+    
+     var imgId = req.params.imgId
+
+    Photo2.find({imgId})
+        .then((result) => {
+            res.json(result);
+            console.log('json :'+ result);
+            res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
             res.end();            
         })
         .catch((err) => {
