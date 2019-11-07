@@ -166,8 +166,6 @@ router.post("/solucao", function(req, res) {
     });
 
 
-
-
 //Creating prototipacao 1
 router.post("/prototipacao", function(req, res) {
 
@@ -194,6 +192,13 @@ var photo = new Photo(req.body);
       console.log('** file uploaded to Cloudinary service');
       console.dir(image);
       photo.image = image;
+
+      //Add to database
+      Photo.create({
+            clienteId: req.body.idCliente,
+            imgURL: imageFile
+        })
+
       // Save photo with image metadata
       return photo.save();
     })
@@ -203,16 +208,10 @@ var photo = new Photo(req.body);
     .finally(function () {
       res.render('photos/create_through_server', { photo: photo, upload: photo.image });
     });
-
-
-
-
          res.statusCode = 302;
-                res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
-                  res.end();
+         res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
+         res.end();
     });
-
-
   });        
 
 //Creating PDF
