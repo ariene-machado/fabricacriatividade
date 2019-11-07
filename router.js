@@ -170,8 +170,10 @@ router.post("/solucao", function(req, res) {
 router.post("/prototipacao", function(req, res) {
 
     var photo = 'http://sfc.fabricadecriatividade.com.br/imagens-site/logo.png';
-
+    var idUser = req.body.idCliente;
     var form = new formidable.IncomingForm();
+
+    console.log(' id cliente '+idUser);
 
     form.parse(req);
 
@@ -183,7 +185,7 @@ router.post("/prototipacao", function(req, res) {
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
 
-var photo = new Photo(req.body);
+var photo = new Photo(req.body.imageFile);
   // Get temp file path
   var imageFile = file.path;
   // Upload file to Cloudinary
@@ -191,16 +193,20 @@ var photo = new Photo(req.body);
     .then(function (image) {
       console.log('** file uploaded to Cloudinary service');
       console.dir(image);
+      console.log('URL image: '+image.url);
       photo.image = image;
+      var photoLink = image.url;
 
+      var imgId = Date.now() + Math.random()
       //Add to database
       Photo.create({
             clienteId: req.body.idCliente,
-            imgURL: imageFile
+            imgURL: image.url,
+            imgId: imgId
         })
 
       // Save photo with image metadata
-      return photo.save();
+      //return 
     })
     .then(function () {
       console.log('** photo saved');
@@ -209,10 +215,32 @@ var photo = new Photo(req.body);
       res.render('photos/create_through_server', { photo: photo, upload: photo.image });
     });
          res.statusCode = 302;
-         res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
+         res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
          res.end();
     });
-  });        
+  });
+
+
+
+//- Ler todas image prototipo
+
+router.get('/image/:id', (req, res) => {
+    
+     var imgId = req.params.id
+
+    Photo.find({imgId})
+        .then((result) => {
+            res.json(result);
+            console.log('json :'+ result);
+            res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
+            res.end();            
+        })
+        .catch((err) => {
+            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
+        });
+});
+
+
 
 //Creating PDF
 router.get("/pdf", function(req, res) {
