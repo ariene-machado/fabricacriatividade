@@ -158,7 +158,7 @@ Photo.create({
         });
 
 
-        
+
 //Creating prototipacao 1
 router.post("/prototipacao", function(req, res) {
 
@@ -201,4 +201,145 @@ router.post("/prototipacao", function(req, res) {
       });
 
   });   
+
+
+
+
+//Creating PDF
+router.get("/pdf", function(req, res) {
+
+const doc = new PDFDocument()
+  let filename = 'ideiaforacaixa'
+  // Stripping special characters
+  filename = encodeURIComponent(filename) + '.pdf'
+  // Setting response to 'attachment' (download).
+  // If you use 'inline' here it will automatically open the PDF
+  res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
+  res.setHeader('Content-type', 'application/pdf')
+
+
+const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus.  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl.';
+const title = 'ESCREVER IDEIA FORA DA CAIXA';
+
+
+ // Title
+doc.fontSize(24);
+doc.fillColor('purple')
+   .text(title, {
+     align: 'center'
+ })
+
+// Scale proprotionally to the specified width
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+
+var imgPath = 'data/'
+
+doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
+   .text('Nome do autor', 250, 415);
+    doc.fillColor('black')
+
+// Scale proprotionally to the specified width
+
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+doc.image('img/logo-purple.jpeg', 200, 650, {width: 200})
+doc.text('Editora',280, 615)
+doc.fillColor('black')
+
+  // Add page problema
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+    doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('PROBLEMA', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+   
+
+// Add page IDEAÇÃO
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+    doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('IDEAÇÃO', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+   
+
+// Add page SOLUÇÃO
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+    doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('SOLUÇÃO', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+
+// Add page PROTOTIPAÇÃO
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('PROTOTIPAÇÃO', { 
+  	align: 'center'
+	}
+);
+
+doc.moveDown();
+doc.fontSize(16);
+doc.fillColor('black')
+doc.text('Resposta', {
+  align: 'left'
+}
+);
+    
+// Add page CONTRA CAPA
+
+doc.addPage()
+doc.moveDown();
+doc.fontSize(18)
+doc.fillColor('purple')
+    doc.moveDown();
+	doc.text('CONTRA CAPA', { 
+  	align: 'center'
+	}
+);
+    doc.pipe(res)
+    doc.end()
+ });
+
 

@@ -13,6 +13,10 @@ const path = require('path');
 var formidable = require('formidable');
 var cloudinary = require('cloudinary').v2
 
+var request = require('request');
+
+
+
 
 
 var Cliente = require('./model/Cliente');
@@ -26,8 +30,11 @@ var Photo = require('./model/Photo');
 var Photo2 = require('./model/Photo2');
 
 
-const PDFDocument = require('pdfkit');
+const PDF = require('pdfkit');
 const fs = require('fs');
+
+
+const axios = require('axios')
 
 
 
@@ -289,8 +296,7 @@ router.get('/image/:imgId', (req, res) => {
         .then((result) => {
             res.json(result);
             console.log('json :'+ result);
-            res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
-            res.end();            
+                  
         })
         .catch((err) => {
             res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
@@ -308,8 +314,7 @@ router.get('/image2/:imgId', (req, res) => {
         .then((result) => {
             res.json(result);
             console.log('json :'+ result);
-            res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
-            res.end();            
+                    
         })
         .catch((err) => {
             res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
@@ -317,142 +322,76 @@ router.get('/image2/:imgId', (req, res) => {
 });
 
 
+  //Creating PDF
+  router.post("/pdf", function(req, res) {
 
-//Creating PDF
-router.get("/pdf", function(req, res) {
+    //create pdf
+    doc = new PDF(); 
+    let imgCapa = req.body.link1Url1; 
+    let contraCapa = req.body.link1Url2; 
 
-const doc = new PDFDocument()
-  let filename = 'ideiaforacaixa'
+
+    let filename = 'ideiaforacaixa'
   // Stripping special characters
   filename = encodeURIComponent(filename) + '.pdf'
   // Setting response to 'attachment' (download).
   // If you use 'inline' here it will automatically open the PDF
   res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
-  res.setHeader('Content-type', 'application/pdf')
+  res.setHeader('Content-type', 'application/pdf')                      //creating a new PDF object
 
 
-const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in suscipit purus.  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus nec hendrerit felis. Morbi aliquam facilisis risus eu lacinia. Sed eu leo in turpis fringilla hendrerit. Ut nec accumsan nisl.';
-const title = 'ESCREVER IDEIA FORA DA CAIXA';
+            request({
+                url: imgCapa,
+                encoding: null // Prevents Request from converting response to string
+              }, function(err, response, body) {
+              if (err) throw err;
+// Inject the image with the required attributes
+              doc.image(body,260, 50,{height:100,width:100});
+              doc.text('HOLIDAYS - 125 Fortime',80,165,{align:'center'})
+              doc.text('Hello this is a demo file',100,200)
+             
+
+        // Add page problema
+        doc.addPage()
+        doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text('PROBLEMA', { 
+            align: 'center'
+          }
+        );
+
+ // Add page problema
+        doc.addPage()
+        doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text(contraCapa, { 
+            align: 'center'
+          }
+        );
 
 
- // Title
-doc.fontSize(24);
-doc.fillColor('purple')
-   .text(title, {
-     align: 'center'
- })
+ // Add page problema
+        doc.addPage()
+        doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text('PROBLEMA3', { 
+            align: 'center'
+          }
+        );
+              doc.pipe(res)
 
-// Scale proprotionally to the specified width
-doc.moveDown();
-// Scale the image
-doc.fontSize(18);
+              doc.end(); 
 
-var imgPath = 'data/'
+              return;
 
-doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
-   .text('Nome do autor', 250, 415);
-    doc.fillColor('black')
+    });
 
-// Scale proprotionally to the specified width
-
-doc.moveDown();
-// Scale the image
-doc.fontSize(18);
-doc.image('img/logo-purple.jpeg', 200, 650, {width: 200})
-doc.text('Editora',280, 615)
-doc.fillColor('black')
-
-  // Add page problema
-doc.addPage()
-doc.moveDown();
-doc.fontSize(18)
-    doc.fillColor('purple')
-    doc.moveDown();
-	doc.text('PROBLEMA', { 
-  	align: 'center'
-	}
-);
-
-doc.moveDown();
-doc.fontSize(16);
-doc.fillColor('black')
-doc.text('Resposta', {
-  align: 'left'
-}
-);
-   
-
-// Add page IDEAÇÃO
-doc.addPage()
-doc.moveDown();
-doc.fontSize(18)
-    doc.fillColor('purple')
-    doc.moveDown();
-	doc.text('IDEAÇÃO', { 
-  	align: 'center'
-	}
-);
-
-doc.moveDown();
-doc.fontSize(16);
-doc.fillColor('black')
-doc.text('Resposta', {
-  align: 'left'
-}
-);
-   
-
-// Add page SOLUÇÃO
-doc.addPage()
-doc.moveDown();
-doc.fontSize(18)
-    doc.fillColor('purple')
-    doc.moveDown();
-	doc.text('SOLUÇÃO', { 
-  	align: 'center'
-	}
-);
-
-doc.moveDown();
-doc.fontSize(16);
-doc.fillColor('black')
-doc.text('Resposta', {
-  align: 'left'
-}
-);
-
-// Add page PROTOTIPAÇÃO
-doc.addPage()
-doc.moveDown();
-doc.fontSize(18)
-doc.fillColor('purple')
-    doc.moveDown();
-	doc.text('PROTOTIPAÇÃO', { 
-  	align: 'center'
-	}
-);
-
-doc.moveDown();
-doc.fontSize(16);
-doc.fillColor('black')
-doc.text('Resposta', {
-  align: 'left'
-}
-);
-    
-// Add page CONTRA CAPA
-
-doc.addPage()
-doc.moveDown();
-doc.fontSize(18)
-doc.fillColor('purple')
-    doc.moveDown();
-	doc.text('CONTRA CAPA', { 
-  	align: 'center'
-	}
-);
-    doc.pipe(res)
-    doc.end()
  });
 
 
