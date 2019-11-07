@@ -167,35 +167,25 @@ router.post("/solucao", function(req, res) {
 
 
 
-    // File upload (example for promise api)
 
+//Creating prototipacao 1
+router.post("/prototipacao", function(req, res) {
 
+  cloudinary.uploader.upload('pizza.jpg', { 
+      tags: 'basic_sample' 
 
-//Creating solucao
-router.post("/uploadfile2", function(req, res) {
-  
-    uploadImage()
-
-        Photo.create({
-            imageUrl: 'img',
-            clienteId: 'req.body.idCliente'
-
-        }, function(err) {
+  },function(err) {
             if (err) {
                 console.log(err);
             } else {
-
-               res.statusCode = 302;
+                res.statusCode = 302;
                 res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
-                  res.end();
-                  console.log('saved solucao');
+                res.end();
+                console.log('saved solucao');
+                
             }
         });
-    });
-
-
-
-
+  });
 
 //Creating PDF
 router.get("/pdf", function(req, res) {

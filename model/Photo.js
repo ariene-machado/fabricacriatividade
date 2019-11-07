@@ -4,8 +4,8 @@ var Schema = mongoose.Schema;
 
 // Define collection and schema for Photo
 var PhotoSchema = new Schema({
-    imageUrl: String,
-    clienteId: String
+    clienteId: String,
+    imgURL: String
 
 });
 
