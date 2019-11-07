@@ -106,7 +106,7 @@ router.post("/ideacao", function(req, res) {
             ideiaOpenCampo2: req.body.ideiaOpenCampo2,
             ideiaFazerCampo1: req.body.ideiaFazerCampo1,
             ideiaFazerCampo2: req.body.ideiaFazerCampo2,
-            clienteId: req.body.idCliente
+            clienteId: req.body.clienteId
           
         }, function(err) {
             if (err) {
