@@ -171,21 +171,49 @@ router.post("/solucao", function(req, res) {
 //Creating prototipacao 1
 router.post("/prototipacao", function(req, res) {
 
-  cloudinary.uploader.upload('pizza.jpg', { 
-      tags: 'basic_sample' 
+    var photo = 'http://sfc.fabricadecriatividade.com.br/imagens-site/logo.png';
 
-  },function(err) {
-            if (err) {
-                console.log(err);
-            } else {
-                res.statusCode = 302;
+    var form = new formidable.IncomingForm();
+
+    form.parse(req);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/data/' + file.name;
+        console.log('file path ' +file.path);
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name);
+
+var photo = new Photo(req.body);
+  // Get temp file path
+  var imageFile = file.path;
+  // Upload file to Cloudinary
+  cloudinary.uploader.upload(imageFile, { tags: 'express_sample' })
+    .then(function (image) {
+      console.log('** file uploaded to Cloudinary service');
+      console.dir(image);
+      photo.image = image;
+      // Save photo with image metadata
+      return photo.save();
+    })
+    .then(function () {
+      console.log('** photo saved');
+    })
+    .finally(function () {
+      res.render('photos/create_through_server', { photo: photo, upload: photo.image });
+    });
+
+
+
+
+         res.statusCode = 302;
                 res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
-                res.end();
-                console.log('saved solucao');
-                
-            }
-        });
-  });
+                  res.end();
+    });
+
+
+  });        
 
 //Creating PDF
 router.get("/pdf", function(req, res) {
