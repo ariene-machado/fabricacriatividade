@@ -98,9 +98,14 @@ router.post("/problema2", function(req, res) {
 router.post("/ideacao", function(req, res) {
 
         Ideacao.create({
-            ideiaIdeacao: req.body.ideiaIdeacao,
-            ideiaIdeacao2: req.body.ideiaIdeacao2,
-            tipoIdeacao: req.body.tipoIdeacao,
+            ideiaAusenteCampo1: req.body.ideiaAusenteCampo1,
+            ideiaAusenteCampo2: req.body.ideiaAusenteCampo2,
+            ideiaConexaoCampo1: req.body.ideiaConexaoCampo1,
+            ideiaConexaoCampo2: req.body.ideiaConexaoCampo2,
+            ideiaOpenCampo1: req.body.ideiaOpenCampo1,
+            ideiaOpenCampo2: req.body.ideiaOpenCampo2,
+            ideiaFazerCampo1: req.body.ideiaFazerCampo1,
+            ideiaFazerCampo2: req.body.ideiaFazerCampo2,
             clienteId: req.body.idCliente
           
         }, function(err) {
@@ -109,7 +114,7 @@ router.post("/ideacao", function(req, res) {
             } else {
 
             	 res.statusCode = 302;
-            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/ideacao.html");
+            	  res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao.html");
                   res.end();
                   console.log('saved ideacao');
             }
