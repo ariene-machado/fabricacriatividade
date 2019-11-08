@@ -182,10 +182,6 @@ router.post("/prototipacao", function(req, res) {
 
     form.parse(req);
 
-    form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/data/' + file.name;
-        console.log('file path ' +file.path);
-    });
 
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
@@ -237,7 +233,7 @@ router.post("/prototipacao2", function(req, res) {
 
     form.parse(req);
 
-   
+    
     form.on('file', function (name, file){
         console.log('Uploaded ' + file.name);
 
