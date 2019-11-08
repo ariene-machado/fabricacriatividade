@@ -343,3 +343,142 @@ doc.fillColor('purple')
  });
 
 
+
+
+
+ //Creating PDF
+  router.post("/pdf", function(req, res) {
+
+    //create pdf
+    doc = new PDF(); 
+    
+
+    let imgCapa = req.body.link1Url1; 
+    let contraCapa = req.body.link1Url2; 
+
+
+    let prob1 = req.body.problema1;
+
+    let prob2 = req.body.problema2;
+
+    let ideaUser = req.body.ideaUser;
+
+    let autor = req.body.autor;
+
+    let imgStatic= "http://res.cloudinary.com/hmsjccygb/image/upload/v1573216007/whgzayu7tkdce8roqwtc.jpg"
+
+
+    let filename = 'ideiaforacaixa'
+  // Stripping special characters
+  filename = encodeURIComponent(filename) + '.pdf'
+  // Setting response to 'attachment' (download).
+  // If you use 'inline' here it will automatically open the PDF
+  res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
+  res.setHeader('Content-type', 'application/pdf')                      //creating a new PDF object
+
+
+const title = 'ESCREVER IDEIA FORA DA CAIXA';
+
+
+ // Title
+doc.fontSize(24);
+doc.fillColor('purple')
+   .text(title, {
+     align: 'center'
+ })
+
+// Scale proprotionally to the specified width
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+
+var imgPath = 'data/'
+
+doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
+doc.text(autor,80,165,{align:'center'})
+doc.fillColor('black')
+
+// Scale proprotionally to the specified width
+
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+doc.image('img/logo-purple.jpeg', 200, 650, {width: 200})
+doc.text('Editora',280, 615)
+doc.fillColor('black')
+
+            request({
+                url: imgStatic,
+                encoding: null // Prevents Request from converting response to string
+              }, function(err, response, body) {
+              if (err) throw err;
+// Inject the image with the required attributes
+              doc.image(body,260, 650,{height:100,width:100});
+             
+        // Add page problema1
+        doc.addPage()
+        doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text('PROBLEMA', { 
+            align: 'center'
+          }
+        );
+
+        doc.fontSize(16)
+            doc.fillColor('black')
+            doc.moveDown();
+          doc.text(prob1, { 
+            align: 'center'
+          }
+        );
+
+        doc.moveDown();
+        doc.fontSize(16)
+            doc.fillColor('black')
+            doc.moveDown();
+          doc.text(prob2, { 
+            align: 'center'
+          }
+        );
+
+
+      doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text('Idea fora da caixa', { 
+            align: 'center'
+          }
+        );
+        
+        doc.fontSize(18)
+            doc.fillColor('black')
+            doc.moveDown();
+          doc.text(ideaUser, { 
+            align: 'center'
+          }
+        );
+
+
+ // Add page contra Capa
+        doc.addPage()
+        doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text('Contra Capa', { 
+            align: 'center'
+          }
+        );
+              doc.pipe(res)
+              doc.end(); 
+
+              return;
+
+    });
+
+ });
+
+

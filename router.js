@@ -337,8 +337,21 @@ router.get('/image2/:imgId', (req, res) => {
 
     //create pdf
     doc = new PDF(); 
+    
+
     let imgCapa = req.body.link1Url1; 
     let contraCapa = req.body.link1Url2; 
+
+
+    let prob1 = req.body.problema1;
+
+    let prob2 = req.body.problema2;
+
+    let ideaUser = req.body.ideaUser;
+
+    let autor = req.body.autor;
+
+    let imgStatic= "http://res.cloudinary.com/hmsjccygb/image/upload/v1573216007/whgzayu7tkdce8roqwtc.jpg"
 
 
     let filename = 'ideiaforacaixa'
@@ -350,18 +363,41 @@ router.get('/image2/:imgId', (req, res) => {
   res.setHeader('Content-type', 'application/pdf')                      //creating a new PDF object
 
 
-            request({
-                url: imgCapa,
-                encoding: null // Prevents Request from converting response to string
-              }, function(err, response, body) {
-              if (err) throw err;
-// Inject the image with the required attributes
-              doc.image(body,260, 50,{height:100,width:100});
-              doc.text('HOLIDAYS - 125 Fortime',80,165,{align:'center'})
-              doc.text('Hello this is a demo file',100,200)
-             
+const title = 'ESCREVER IDEIA FORA DA CAIXA';
 
-        // Add page problema
+
+ // Title
+doc.fontSize(24);
+doc.fillColor('purple')
+   .text(title, {
+     align: 'center'
+ })
+
+// Scale proprotionally to the specified width
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+
+var imgPath = 'data/'
+
+
+  doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
+  doc.moveDown();
+  doc.text(autor,80,465,{align:'center'})
+  doc.fillColor('black')
+
+// Scale proprotionally to the specified width
+
+doc.moveDown();
+// Scale the image
+doc.fontSize(18);
+doc.image('img/logo-purple.jpeg', 200, 650, {width: 200})
+doc.text('Editora',280, 615)
+doc.fillColor('black')
+
+            
+             
+        // Add page problema1
         doc.addPage()
         doc.moveDown();
         doc.fontSize(18)
@@ -372,37 +408,60 @@ router.get('/image2/:imgId', (req, res) => {
           }
         );
 
- // Add page problema
-        doc.addPage()
-        doc.moveDown();
-        doc.fontSize(18)
-            doc.fillColor('purple')
+        doc.fontSize(16)
+            doc.fillColor('black')
             doc.moveDown();
-          doc.text(contraCapa, { 
+          doc.text(prob1, { 
+            align: 'center'
+          }
+        );
+
+        doc.moveDown();
+        doc.fontSize(16)
+            doc.fillColor('black')
+            doc.moveDown();
+          doc.text(prob2, { 
             align: 'center'
           }
         );
 
 
- // Add page problema
+      doc.moveDown();
+        doc.fontSize(18)
+            doc.fillColor('purple')
+            doc.moveDown();
+          doc.text('Idea fora da caixa', { 
+            align: 'center'
+          }
+        );
+        
+        doc.fontSize(18)
+            doc.fillColor('black')
+            doc.moveDown();
+          doc.text(ideaUser, { 
+            align: 'center'
+          }
+        );
+
+
+ // Add page contra Capa
         doc.addPage()
         doc.moveDown();
         doc.fontSize(18)
             doc.fillColor('purple')
             doc.moveDown();
-          doc.text('PROBLEMA3', { 
+          doc.text('Contra Capa', { 
             align: 'center'
           }
         );
               doc.pipe(res)
-
               doc.end(); 
 
               return;
 
     });
 
- });
+
 
 
 //Ideacao page route
