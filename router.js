@@ -363,7 +363,7 @@ router.get('/image2/:imgId', (req, res) => {
   res.setHeader('Content-type', 'application/pdf')                      //creating a new PDF object
 
 
-const title = 'ESCREVER IDEIA FORA DA CAIXA';
+const title = 'EU TIVE UMA IDEIA DENTRO DA CAIXA';
 
 
  // Title
