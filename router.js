@@ -304,6 +304,24 @@ router.get('/image/:imgId', (req, res) => {
 });
 
 
+//- Ler todas ideias
+
+router.get('/ideias/:id', (req, res) => {
+    
+     var id = req.params.clienteId
+
+    Ideacao.find({id})
+        .then((result) => {
+            res.json(result);
+            console.log('json :'+ result);              
+        })
+        .catch((err) => {
+            res.status(500).json({ success: false, msg: `Something went wrong. ${err}` });
+        });
+});
+
+
+
 //- Ler todas image prototipo2
 
 router.get('/image2/:imgId', (req, res) => {
