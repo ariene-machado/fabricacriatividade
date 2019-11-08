@@ -271,7 +271,7 @@ var photo = new Photo(req.body.imageFile);
       res.render('photos/create_through_server', { photo: photo, upload: photo.image });
     });
          res.statusCode = 302;
-         res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/livro.html");
+         res.setHeader("Location", "http://sfc.fabricadecriatividade.com.br/prototipacao2.html");
          res.end();
     });
   });
