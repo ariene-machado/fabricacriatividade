@@ -389,7 +389,7 @@ router.get('/image2/:imgId', (req, res) => {
   doc.image('img/book-cover-01.png', 60, 0, {scale: 0.15}, {margin: 0})
   doc.moveDown();
   doc.text(autor,80,600,{align:'center'})
-  doc.fillColor('black');
+  doc.fillColor('white');
 
 
   //adiciona image to prototipo 1
