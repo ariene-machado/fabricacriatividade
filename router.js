@@ -457,7 +457,7 @@ router.get('/image2/:imgId', (req, res) => {
  // Add page contra Capa
         doc.addPage()
 
-        doc.image('img/book-cover-02.png', 60, 0, {scale: 0.15}, {margin: 0})
+        doc.image('img/book-cover-02.png', 60, 0, {scale: 0.30}, {margin: 0})
           doc.moveDown();
           doc.text("contra capa",80,600,{align:'center'})
           doc.fillColor('black');
