@@ -16,9 +16,6 @@ var cloudinary = require('cloudinary').v2
 var request = require('request');
 
 
-
-
-
 var Cliente = require('./model/Cliente');
 var Problema = require('./model/Problema');
 var Problema2 = require('./model/Problema2');
@@ -31,6 +28,8 @@ var Photo2 = require('./model/Photo2');
 
 
 const PDF = require('pdfkit');
+const blobStream  = require('blob-stream');
+
 const fs = require('fs');
 
 
@@ -337,11 +336,9 @@ router.get('/image2/:imgId', (req, res) => {
 
     //create pdf
     doc = new PDF(); 
-    
 
     let imgCapa = req.body.link1Url1; 
     let contraCapa = req.body.link1Url2; 
-
 
     let prob1 = req.body.problema1;
 
@@ -351,64 +348,77 @@ router.get('/image2/:imgId', (req, res) => {
 
     let autor = req.body.autor;
 
-    let imgStatic= "http://res.cloudinary.com/hmsjccygb/image/upload/v1573216007/whgzayu7tkdce8roqwtc.jpg"
-
-
     let filename = 'ideiaforacaixa'
   // Stripping special characters
   filename = encodeURIComponent(filename) + '.pdf'
   // Setting response to 'attachment' (download).
   // If you use 'inline' here it will automatically open the PDF
   res.setHeader('Content-disposition', 'attachment; filename="' + filename + '"')
-  res.setHeader('Content-type', 'application/pdf')                      //creating a new PDF object
+  res.setHeader('Content-type', 'application/pdf') ;
+  let imgStatic = "https://res.cloudinary.com/hmsjccygb/image/upload/v1573220551/hstjtloyjtevk7obry13.jpg";
+                    //creating a new PDF object
 
-
-const title = 'EU TIVE UMA IDEIA DENTRO DA CAIXA';
+//const title = 'EU TIVE UMA IDEIA DENTRO DA CAIXA';
 
 
  // Title
-doc.fontSize(24);
-doc.fillColor('purple')
-   .text(title, {
-     align: 'center'
- })
+// doc.fontSize(24);
+// doc.fillColor('purple')
+//    .text(title, {
+//      align: 'center'
+//  })
 
 // Scale proprotionally to the specified width
-doc.moveDown();
+// doc.moveDown();
+// // Scale the image
+// doc.fontSize(18);
+
+// var imgPath = 'data/'
+
+
+  //doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
+
+  //Image book cover aqui
+ // doc.image('img/book-cover-01.png',10, 10, { width: 590, height: 700, align: 'center'})
+
+  // Fit the image in the dimensions, and center it both horizontally and vertically
+//doc.image('img/book-cover-01.png', 10, 10, {fit: [800, 700], align: 'center', valign: 'center'})
+
 // Scale the image
-doc.fontSize(18);
 
-var imgPath = 'data/'
-
-
-  doc.image('img/Image-user.jpg', 160, 150, {width: 300, align: 'center'})
+  doc.image('img/book-cover-01.png', 60, 0, {scale: 0.15}, {margin: 0})
   doc.moveDown();
-  doc.text(autor,80,465,{align:'center'})
-  doc.fillColor('black')
+  doc.text(autor,80,600,{align:'center'})
+  doc.fillColor('black');
 
-// Scale proprotionally to the specified width
 
-doc.moveDown();
-// Scale the image
-doc.fontSize(18);
-doc.image('img/logo-purple.jpeg', 200, 650, {width: 200})
-doc.text('Editora',280, 615)
-doc.fillColor('black')
+  //adiciona image to prototipo 1
 
-            
-             
-        // Add page problema1
-        doc.addPage()
         doc.moveDown();
-        doc.fontSize(18)
+
+        console.log('img capa:' + imgCapa);
+
+        request({
+                url: imgCapa,
+                encoding: null // Prevents Request from converting response to string
+              }, function(err, response, body) {
+              if (err) throw err;
+// Inject the image with the required attributes
+              doc.image(body,160, 315,{width:300});  
+ 
+
+             doc.addPage()
+            doc.moveDown();
+            doc.fontSize(18)
             doc.fillColor('purple')
             doc.moveDown();
-          doc.text('PROBLEMA', { 
+            doc.text('PROBLEMA', { 
             align: 'center'
           }
         );
 
-        doc.fontSize(16)
+
+            doc.fontSize(16)
             doc.fillColor('black')
             doc.moveDown();
           doc.text(prob1, { 
@@ -446,21 +456,19 @@ doc.fillColor('black')
 
  // Add page contra Capa
         doc.addPage()
-        doc.moveDown();
-        doc.fontSize(18)
-            doc.fillColor('purple')
-            doc.moveDown();
-          doc.text('Contra Capa', { 
-            align: 'center'
-          }
-        );
+
+        doc.image('img/book-cover-01.png', 60, 0, {scale: 0.15}, {margin: 0})
+          doc.moveDown();
+          doc.text("contra capa",80,600,{align:'center'})
+          doc.fillColor('black');
+
               doc.pipe(res)
               doc.end(); 
 
               return;
 
     });
-
+});
 
 
 

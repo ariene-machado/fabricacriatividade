@@ -342,10 +342,6 @@ doc.fillColor('purple')
     doc.end()
  });
 
-
-
-
-
  //Creating PDF
   router.post("/pdf", function(req, res) {
 
@@ -480,5 +476,48 @@ doc.fillColor('black')
     });
 
  });
+
+
+  function generatePdf(){
+
+		console.log('click generate pdf2');
+
+		var pdf = new jsPDF('p', 'mm', 'a4');
+
+		//Page capa
+		var autor = $('#autor').val();
+		var problema1 = $('#problema1').val();
+		var problema2 = $('#problema2').val();
+
+		//add img stactic
+		var img = './imagens-site/book-cover-01.png';
+
+		pdf.setFontSize(22)
+		pdf.text(20,20,'This is a title')
+		pdf.setFontSize(16)
+		pdf.text(20,30,autor)
+
+		pdf.addImage(img,'PNG', 15, 40, 180, 160)
+
+		//new page
+		pdf.addPage();
+		pdf.setFontSize(22)
+		pdf.text(20,20,'Problema')
+		pdf.setFontSize(16)
+		pdf.text(20,30,problema1)
+
+		//Print problema 2
+		pdf.setFontSize(22)
+		pdf.text(20,40,'Problema 2')
+		pdf.setFontSize(16)
+		pdf.text(20,50,problema2)
+
+
+		//Save livro
+		pdf.save("livro.pdf")
+}
+
+
+
 
 
